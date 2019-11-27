@@ -17,7 +17,7 @@ class News extends Model//Validationを定義
     // Newsモデルに関連付けを行う
     public function histories()
     {
-      return $this->hasMany('App\History');
+      return $this->hasMany('App\History');//newsテーブルに関連づいているhistoriesテーブルを全て取得するというメソッド
 
     }
     

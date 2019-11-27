@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin;//名前空間
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-// 以下を追記することでNews Modelが扱えるようになる
+
 use App\News;
 use App\History;
 use Carbon\Carbon;
@@ -15,10 +15,8 @@ class NewsController extends Controller
       return view('admin.news.create');
   }
 
-  // 以下を追記
   public function create(Request $request)//Requestクラスでユーザーから送られる情報を全て含んでいるオブジェクトを取得。
-  { // 以下を追記
-      // Varidationを行う
+  { 
       $this->validate($request, News::$rules);//$thisは擬似変数
       //第一引数にリクエストのオブジェクトを渡し、$request->all()を判定。問題があれば、
       //エラ〜メッセージと入力値とともに直前のページに戻る。
@@ -90,7 +88,7 @@ public function update(Request $request)//編集画面から送信されたフ�
       
       $history = new History;
         $history->news_id = $news->id;
-        $history->edited_at = Carbon::now();
+        $history->edited_at = Carbon::now();//現在時刻を取得
         $history->save();
 
        return redirect('admin/news');
