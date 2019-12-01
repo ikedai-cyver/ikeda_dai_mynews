@@ -23,8 +23,8 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">性別</label>
-                        <p><label><input type="checkbox" name="gender">男性</label></p>
-                        <p><label><input type="checkbox" name="gender">女性</label></p>
+                        <p><label><input type="checkbox" name="gender" value="男">男性</label></p>
+                        <p><label><input type="checkbox" name="gender" value="女">女性</label></p>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">趣味</label>

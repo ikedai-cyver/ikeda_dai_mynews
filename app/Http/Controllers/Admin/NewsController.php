@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Admin;//名前空間
+namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,10 +17,9 @@ class NewsController extends Controller
 
   public function create(Request $request)//Requestクラスでユーザーから送られる情報を全て含んでいるオブジェクトを取得。
   { 
-      $this->validate($request, News::$rules);//$thisは擬似変数
-      //第一引数にリクエストのオブジェクトを渡し、$request->all()を判定。問題があれば、
-      //エラ〜メッセージと入力値とともに直前のページに戻る。
-      //News::$rulesはNews.phpの$rules変数を呼び出している
+      $this->validate($request, News::$rules);
+      
+      
       $news = new News;//Newsモデルからインスタンス（NewsレコードつまりNewsテーブル）を生成
       $form = $request->all();//ユーザーが入力したデータを取得できる
 
