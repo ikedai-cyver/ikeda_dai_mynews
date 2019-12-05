@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\News;
 use App\History;
 use Carbon\Carbon;
-
+use Storage;
 class NewsController extends Controller
 {
   public function add()
@@ -25,8 +25,8 @@ class NewsController extends Controller
 
       // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
       if (isset($form['image'])) {//引数の中のデータの有無を判断するメソッド
-        $path = $request->file('image')->store('public/image');//file()はざっくり画像をアップロードするメソッド。store()は保存先を指定するメソッド
-        $news->image_path = basename($path);//basename()で引数のファイル名だけを取得。それをNewsテーブルのimage_patに代入。
+       $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $news->image_path = Storage::disk('s3')->url($path);
       } else {
           $news->image_path = null;
       }
@@ -74,8 +74,8 @@ public function update(Request $request)//編集画面から送信されたフ�
         if ($request->remove == 'true') {
             $news_form['image_path'] = null;
         } elseif ($request->file('image')) {
-            $path = $request->file('image')->store('public/image');
-            $news_form['image_path'] = basename($path);
+          $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+           $news->image_path = Storage::disk('s3')->url($path);
         } else {
             $news_form['image_path'] = $news->image_path;
         }
